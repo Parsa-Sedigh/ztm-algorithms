@@ -219,7 +219,68 @@ Mose code solutions, there's usually a trade-off between speed and memory. You w
 then you might have to sacrifice with increased speed(I think less speed???).
 
 ## 45-023 Space Complexity
+The heap is usually where we store variables that we assign values to and the stack is usually where we keep track of our function calls.
+Sometimes we want to optimize for using less memory instead of using less time.
+
+Talking about memory or space complexity is very similar to talking about the time cost. We look at the total size relative to the size of the input and
+see how many new variables or new memory we're allocating, how much memory is being used.
+
 ## 46-024 Exercise Space Complexity
+In space complexity, we're talking about additional space, so we don't include space taken up by the inputs(so we don't care how big the input is).
+```js
+function booo(n) { // space complexity: O(1)
+    for (let i =0;i<n.length;i++) {
+        console.log('booo');
+    }
+}
+
+function arrayOfHiNTimes(n) { // space: O(n)
+    let hiArray = [];
+   for (let i =0;i<n;i++) { // let i = n; is constant time
+      hiArray[i] = 'hi'; // data structure taking space. Each item of array is an additional memory space on our computers
+   }
+   
+   return hiArray;
+}
+
+arrayOfHiNTimes(6);
+```
+
+Sometimes there's a tradeoff between saving time and saving space. So you have to decide which one you're optimizing for.
+
 ## 47-025 Exercise Twitter
+When we're comparing each item in the array with the others, we're doing nested loops, so we have: O(n^2) . It's expensive!
+
+What is the big O notation of `<string>.length` operation?
+
+It depends on the language that you're working with. We need to know how the `length` method works on the strings here(it's built into JS). Based on how
+the language is built, that `.length` might go one by one and iterate over each letter and count the number of characters. But JS has .length property built into each string.
+So for JS, this `.length` is just a simple **lookup**. It's not a function, instead, it's a property of an object. So it's `O(1)` in JS.
+Without knowing how your language works, you don't know how this `.length` property works(or if you had a method, how that would work?).
+
 ## 48-026 Optional Javascript Loops
 ## 49-027 Section Summary
+BigO says which function, algorithm or code is the best.
+
+BigO is for worst case.
+
+Sometimes readability maybe matters more than scalability, in this case maybe O(n^2) is more readable than O(n) or maybe time complexity is less important than
+space complexity.
+
+001 Course-Mind-Map
+https://coggle.it/diagram/W5u8QkZs6r4sZM3J/t/master-the-interview
+
+003 Technical-Interview-Mind-Map
+https://coggle.it/diagram/W5E5tqYlrXvFJPsq/t/master-the-interview/c25f98c73a03f5b1107cd0e2f4bce29c9d78e31655e55cb0b785d56f0036c9d1
+
+004 Google-Interview-Video
+https://www.youtube.com/watch?v=XKu_SEDAykw
+
+006 containsCommonItem
+https://repl.it/@aneagoie/containsCommonItem
+
+007 Interview-Answer-in-Javascript
+https://repl.it/@aneagoie/Google-Question
+
+007 Set-
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
