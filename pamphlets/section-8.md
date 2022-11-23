@@ -116,19 +116,68 @@ Doubly linked list allows us to traverse our list backwards.
 
 Searching through a doubly linked list can actually be a little bit more efficient and lookup can be O(n/2) because we can start at both ends and if we know
 in which half of the list what we're looking for is, we can pick the optimum place to start. But we drop the constant so lookup is still `O(n)` , but it's still
-techincally a little bit faster.
+technically a little bit faster.
 
 The downside to a doubly linked list, is that we might have to hold more memory.
 
-Now let's convert our singgly linked list that we've built to a doubly one.
+Now let's convert our singly linked list that we've built to a doubly one.
 
 ## 103-016 Exercise Doubly Linked Lists
 File attached
 ## 104-017 Solution Doubly Linked Lists
+
 ## 105-018 Singly VS Doubly Linked Lists
+The pro of a singly linked list, is that it's a fairly simple implementation, especially compared to the doubly one. It requires lesser memory and because
+there's less memory when we do things like delete and insert and because there is technically less operation, we don't have to move around the `prev` property of a node,
+it's a little bit faster.
+
+The downside with a singly linked list is that it can't be iterated in reverse or traversed from back to front. If we ever lose the reference to `this.head` node of the
+list, the list can actually be lost in memory forever.
+
+So singly list is appropriate to use when you have less memory or memory is really expensive and you want to be careful of how much you use and your main goal is that
+you want to do fast insertion and deletion and you don't really have that much searching, especially when you have insertion at the beginning of the list.
+
+About doubly one:
+The good side of it is that it can be iterated or traversed both from the front or from the back. Another beauty is that if you need to delete a previous node,
+you don't need to traverse from the head node and find what the previous node is, which a singly linked list has no concept of. You can do that easily with a 
+doubly linked list.
+
+The downside is that it's complex to implement and requires more memory and storage because of prev property and there are some extra operations that we need to
+perform to make sure that when we do insert and delete, that prev property is updated as well.
+
+So doubly linked lists are good when you don't have that much limitation on memory and when you want good operation for searching of elements, such as 
+searching backwards instead of just forwards.
+
 ## 106-019 Exercise reverse()
+One of the most popular interview questions about linked lists is to reverse a linked list.
+
 ## 107-020 Solution reverse()
+todo: Didn't understand!
 ## 108-021 Linked Lists Review
+In some languages they aren't builtin, because linked lists are low level data structures. It's used a lot in other data structures like hash tables, stacks
+and queues. It's a fundamental DS.
+
+In linked lists, there's no random access in the sense that when looking for sth, you have to actually traverse the list, but with hash tables, we can find things
+**right away**. With arrays, we can find things through indexes.
+
+Linked lists are ordered unlike hash tables.
+
+If we had a large number of items in an array and we keep adding to that array, we'd have to have excessive overhead cost for copying the array in memory and doubling up
+the space when it reaches the limit to create a larger array. Versus a linked list where we can have a fast insertion and deletion, especially once we have a 
+reference to where we want to insert or delete that node. This also becomes really fast when it's at the beginning or end of the list(we're gonna see this in stacks and
+queues).
+
+The primary reason to choose a linked list over sth like an array, is simplicity and ability to grow and shrink as needed.
+
+Linked lists are used in file systems or browser history when you go back and forth on a browser, because you can traverse one by oen from one place to another and
+remember in hash tables, how we had this issue of collision and when we had a collison, when two or more key-value pairs had collision, we combined them into
+nodes and the first node pointing to the next one and ... .
+
+If you look at the hash table implementation in this course and in `set` method, we did a check to check if a memory address exist and if it does, we used an **array**
+to push our items in case we had multiple items(when we had a collision), because sometimes we can set our hash table memory size to be a lot smaller(therefore we might get
+get collision) like 2 and now you can see why now instead of using an array which everytime we need to insert a new item, yeah it work, but if we had to delete an item on the
+hash table and that item was collided and therefore in an array, we'd have to **unshift** the array which is very slow. So we can use a linked list so delete becomes
+easier.
 
 --- 
 
