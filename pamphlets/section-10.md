@@ -129,17 +129,103 @@ JSON.stringify(traverse(tree.root)); // give it the root node of our tree
 ```
 
 ## 131-008 Solution insert()
+In js, you can use **arboreal** library for tree traversal and ... .
 
+## 132-009 Solution lookup() 
+It's up to us put the node that has a equal value to the currentNode(left or right doesn't matter in case of equal value).
 
-## 132-009 Solution lookup()
+To verify the result, you can use `JSON.stringify(traverse(tree.root))` and then paste the JSON into the browser's console which would give you a nicer
+format. Just note that you shouldn't copy the `stringify()` result with it's quotes around(don't copy the string).
+
+So we understood why we have bigO of O(log n): Although we have loops like while loops, we're not actually iterating through every single node, we're only
+iterating using divide and conquer which means we're dividing up so that we don't visit all the nodes. Each node that we visit, we make a decision to go left
+or right(in this case).
+
 ## 133-010 Extra Exercise remove()
-## 134-011 Solution remove()
+
+## 134-011 Solution remove() **(TODO)**
+
 ## 135-012 AVL Trees + Red Black Trees
+Usually in production, you wanna have a balanced tree. There are 2 types of trees that are popular when it comes to this. Although we built our 
+BST, you'd most likely in production use sth like an AVL tree or a red black tree that automatically re-balances itself, so that we don't have those edge
+cases where our balanced tree turns into a linear unbalanced tree and we get O(n) on all the operations.
+
+Usually you use a library that implements these trees.
+
+So these two trees are usually the most popular for balancing BSTs. Just explain why they are useful(because if we have an unblanced tree, it will become
+like a linked list and gets O(n) on all operations).
+
 ## 136-013 Resources AVL Trees + Red Black Trees
+See the attached file.
+
 ## 137-014 Binary Heaps
+A heap can be used in any algorithm where ordering is important and it's commonly used when it comes to priority queues. With arrays, we had random access, it allowed
+us to randomly access any element within them using an index. In a linked list, we can change things dynamically like an array, but finding sth within them is
+`O(n)` (linear time), because we had to go through the linked list. Heaps are a bit different. You can't do O(1) random access like we did with arrays or hash tables,
+as we know about trees, we have to do some sort of traversal(heap is a type of tree!). Now compared to a BST, in heaps, lookup is O(n) and not O(log n), because
+it's less ordered than a BST. A BST had a meaning between left and right child, the left was always less than the right. In a binary heap, that doesn't matter.
+Left and right can be any value as long as it's less than the top value(in max heap). So if the value we're looking for is for example less than the currentNode in
+a binary heap, we have to check **both** nodes underneath the `currentNode` and ... and looking up becomes O(n) . 
+
+So binary heaps pretty much turned into a searching through a linked list or iterating through an array.
+
+Q: So why would we ever want to use a binary heap?
+
+A: Binary heaps are really great at doing comparative operations, just like saying: I want people that have a value over 33 . Because in that case, we can just
+grab the top nodes in a max binary heap. Instead of going all the way down through the nodes. This example would be O(n) with a BST.
+
+Binary heaps are used a lot in data storage, priority queues, sorting algorithms.
+
+Insert operation in binary heaps: **Worst case: O(log n) - Best choice: O(1)**
+
+In order to truly understand why we need binary heap, why they're useful, how they're different from BST, we need to talk about priority queues.
+
 ## 138-015 Quick Note on Heaps
+### Gotcha about heaps:
+When you hear memory heaps, that's not the same as the heap DS. The naming is just coincidental and heap has no real relationship with the DS that is named
+heap.
+
+Memory heap is a heap of memory if you're talking about a language runtime for example. VS a heap DS, they're different.
+
 ## 130-016 Priority Queue
+The beauty of binary heaps is that they take up the least amount of space possible because it's always left to right insertion. So there's no conept of
+an unbalanced binary heap. We don't have to re-balance it like a BST, because of this(because they do left to right insertion), they preserve this order of 
+insertion, which is great and you can implement binary heaps using arrays vs what we did before with BSTs where we used nodes.
+
+Left to right insertion: In binary heaps, always start from left when inserting nodes and then go to right(in the same level).
+
+So the only guarantee that binary heap gives us, is the parent is always greater than the children(in case of max heap). Now besides being memory efficient and 
+compact(because it's always a complete binary tree), binary heaps are useful for things such as priority queues.
+
+Although searching through a binary heap is a lot slower than a BST, you have an idea of priority, because insertion is done in order(left to right) and
+although we might have to bubble up the inserts every once in a while(bubbling means for example in a max heap, after inserting a value which is big, you need
+to bring it upper in the tree till it's less than it's parent, why? because it has more value(higher priority!)), most of the time you get really fast inserts
+with binary heaps.
+
+**Note:** So in binary heaps, lookups are slow but you wanna use binary heaps when you're just interested in finding the max or min it it's a min heap and
+a lot of times in binary heaps or in priority queues, you have methods like findMax or findMin that is O(1), because you know right away that the top root node
+is the max or min(in min heaps).
+
 ## 140-017 Trie
+A trie is a specialized tree, used in searching(most often with text) and in most cases, it can outperform search trees, hash tables and most other DSs depending
+on the type of search you're doing.
+
+Tries allow you to know if a word or part of a word exists in a body of a text. A trie usually has an empty root node which is the starting point.
+
+Trie is not a binary tree because a node can have more than 2 children.
+
+The power of trie is when we search for sth such as `N`. We will know that there's 2 words associated with the word N(look at the slide).
+
+Another name of trie is prefix tree.
+
+You can think of trie as auto-completion. It's used for searching words in a dictionary, providing other suggestions on search engines or even IP routing.
+
+The benefit of this DS is speed and space, The bigO of finding a word in DS is:
+Because we're not gonna go through every single node. Instead, all we need to do is to find the length of the word, so the bigO of a trie in searching is
+O(length of the word we're searching for). In space complexity, tries also have a major advantage. Because we use prefixes such as N in the slide which is used
+in multiple words, we don't have to store it multiple times, it's stored in one location and we have children linking to it. Because of those prefixes,
+you save a lot of space, because we avoid storing the prefix letters.
+
 ## 141-018 Tree Review
 
 ---
