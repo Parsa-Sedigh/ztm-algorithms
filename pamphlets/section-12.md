@@ -81,11 +81,76 @@ So everytime we recurse, the function gets closer and closer to the base case an
 the stack.
 
 ## 155-005 Exercise Factorial
+
 ## 156-006 Solution Factorial
+We keep going recursively until we hit the base case.
+
+What is the big(o) of this?
+```js
+function recursiveFactorial(number) {
+    // the base case:
+    if (number === 2) {
+        return 2;
+    }
+    
+    return number * recursiveFactorial(number - 1);
+}
+```
+
+A: O(n) .
+
 ## 157-007 Exercise Fibonacci
 ## 158-008 Solution Fibonacci
+The recursive approach of fibo algo is `O(2^n)` or exponential. 
+
+Exponential time means with every additional element in the fibonacci sequence, we get an increase in function calls, exponentially.
+
+So although the recursive approach for fibo algo might be more readable, it's not an ideal solution since big O time complexity of it is pretty big
+and the iterative approach for fibo algo is a lot better with time complexity of `O(n)` .
+
+Fibonacci sequence with recursion can be made to `O(n)` using dynamic programming and memoization.
+
 ## 159-009 Recursive VS Iterative
+There are times when recursion can keep your code DRY(do not repeat yourself).
+
+recursion cons:
+
+Everytime you add a function to the call stack, it adds extra piece of memory, so you have cases where you can get stack overflows, or if your
+system has expensive memory, you want to avoid making too many recursive calls.
+
+The main drawback of recursion is: Iterative approaches tend to be more efficient because they don't make additional function calls that take up the
+stack space. But the drawback of iterative approach is that they might be not as readable as recursive ones.
+
+It's good to use recursion when you're working with data structures that you're not sure how deep they are, where you don't know how many loops to go through.
+
+Recursion is useful for things such as tree data structures and doing traversal.
+
+**Tail call optimization** in JS with ES6 allows recursions to be called without increasing the call stack. In other languages as well, with this topic,
+there are certain ways to write recursion so they're more memory efficient. So this large stack issue in recursions, can eb resolved during production.
+ 
+
 ## 160-010 When To Use Recursion
+When to use recursion?
+
+When it gets to complicated problems like traversing or searching through trees or graphs with BFS and DFS, recursion is really useful and better than
+iterative approaches. Also when sorting items, there are also cases that we'll see recursion is preferred.
+
+3 key things in interview that might trigger a recursive solution:
+1) A problem can be divided into a number of sub-problems that are smaller instances of that same problem, such as fibonacci or factorial. We can break
+the problem down to smaller trees
+2) Each of these instances of sub problem is identical in nature, that is the calculations that we need to do, are pretty much the same. They may be smaller
+values, but the actual calculations underneath it, is all the same over and over.
+3) The solutions for solving the smaller problems(the leaf nodes of that tree), if you combine them, that solves the problem at hand, it's a recursive solutions.
+
+You will see a lot of divide and conquer using recursion. The divide and conquer type of questions, usually have recursion in them and the one thing that
+recursions can do that looping can't, is that they can make tasks super easy(in terms of readability), such as these type of problems.
+
+Traversing trees with iterative approach is very harder than recursion. With loops, you usually have to maintain some sort of a stack to keep track of things.
+
+
+
+
+
 ## 151-011 Exercise Reverse String With Recursion
 File attached
 
