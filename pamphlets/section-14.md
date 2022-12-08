@@ -114,7 +114,6 @@ Downside: It can get slow especially if the tree of graph is really deep and it'
 
 Now you know when to use which one!
 
-
 ## 187-008 Resources BFS vs DFS
 File attached
 ## 188-009 Exercise BFS vs DFS
@@ -153,14 +152,106 @@ a wide tree(maybe a node have 10 child nodes) instead of a binary tree which a n
 node's value(for example a large object), the memory consumption might be big.
 
 ## 191-012 breadthFirstSearchRecursive()
+Usually BFS is implemented with iterative approach. But for fun, we can do a recursive BFS.
+
+In the answer(breadthFirstSearchR method), we didn't define the queue and list in the method itself. Why? Because in a recursive function, it's gonna be
+called over and over and therefore we're gonna be resetting these variables if we declare them locally and list and queue would be an empty array in each
+call. So we would need to pass queue and list as params and we pass params like: `BFSR([this.root], []);`. So this was a gotcha in recursive approach.
+
 ## 192-013 PreOrder, InOrder, PostOrder
+There's 3 ways that we can implement DFS(3 types of traversals): preorder, inorder, postorder. There's 3 different orders that
+we can return the `list` from the algo with DFS.
+
+With **inorder**, we have everything in sorted order.
+
+**Preorder** is useful if you want to recreate a tree.
+
 ## 193-014 depthFirstSearch()
+Most of the time, DFS is implemented using recursion because it's simple to do so. Now sine with recursion, we're gonna call the function over and over,
+we can't declare variables inside of it because they'll be reset by each call. So we're gonna pass it params.
+
+When we have recursion, the parent function call which calls it's function again, stops at that line until the further recursive calls return:
+```js
+function recursive() {
+    // code ...
+    recursive() // this will be sit here until it's child recursive calls return(in case we want the result) or finish execution
+    // ...    
+}
+```
+
+With recursion, we're using a stack DS, each of the function calls are added to the call stack and we'll start to `return`, as they reach the end.
+
+BFS -> uses queue stack(for remembering the visited nodes and their children)
+DFS -> uses stack DS(for recursive calls)
+
+The amount of space that we need in DFS unlike BFS which uses queue DS, is dependant on the height of the tree because the height of the tree will match the
+deepest recursive function call and that's what's going to be added to the stack as memory. So our memory consumption in DFS is `O(height of tree)` which will
+give us the worst case scenario when using DFS.
+
 ## 194-015 Optional Exercise Validate A BST
-File
+File TODO
 ## 195-016 Graph Traversals
+Trees are a type of graph.
+
+What items are the closes or related to the last book that we bought -> BFS
+
+On facebook to see what type of friend reqs I should be recommended. For example if I have a connection on linkedin -> DFS to see what degree of connection
+I have with that CEO.
+
+These are the basis of how peer to peer networks work, how google maps work(using BFS).
+
+BFS is usually good for shortest path, that is what's the closest to our node? What are the most related items on amazon? Who are our closest friends on facebook
+or closest connections on linkedin?
+
+DFS is good to see if sth exists. With DFS, we're able to go really deep into a graph fairly fast than BFS that might cost a bit of extra memory.
+
 ## 196-017 BFS in Graphs
+BFS is used in recommendation engines, peer to peer networks, google maps, facebook friend requests and instagram recommendations.
+
+BFS allows us to convert a graph essentially into a tree because we know who the children of the parent node is and then the grandchildren and then ... .
+
+BFS pros:
+
+Helps us to determine the shortest path and it's better if we know that a node that we're looking for is close to us, because it's gonna look at the 
+closer nodes first. 
+
+BFS is crafter to help us determine the shortest path between two nodes in a graph.
+
 ## 197-018 DFS in Graphs
+You can solve a maze with DFS! Because DFS is exactly like solving a maze. Because in maze, the idea is to go as deep as we can and when you
+git a roadblock, you backtrack and find a different route and then you keep backtracking until you find the desired node or you exit the maze.
+
+You can now implement an algorithm that solves a maze..
+
+The idea of backtracking after a dead end and then repeating the walk to another path, is **recursion**. 
+
+DFS is good at saying does the path exits. However, it doesn't tell us the shortest path, but whether it even exists and it uses less memory than BFS.
+
+The one downside with DFS is if you have a really deep graph, then it can get slow, because the deeper the graph, the more recursive calls, the more space
+complexity you add because we have to keep track of those function calls on a stack.
+
 ## 198-019 Dijkstra + Bellman-Ford Algorithms
+We can use Dijkstra or bellman-ford algos to figure out the shortest path problem. But didn't we use BFS for the shortest path problems? Why do we need these
+two extra algos?
+
+Yeah, BFS is great for the shortest path problem, but there's one thing that it can't do. It assumes that each jump(path) to another node in a graph, has the same
+weight. With BFS and DFS we don't care what kind of weight an edge has. But in real life for example in google maps, some roads are faster than the
+others. Maybe because of traffic or the distance from one node to another is shorter than other.
+
+So DFS doesn't take into the account these weights, we need sth else.
+
+So these two new algos allow us to find the shortest path between two nodes(vertices) of a weighted graph.
+
+Bellman-ford is very effective at solving the shortest path over Dijkstra's algo because it can accommodate negative weights. So if a weighted graph
+has negative weights or number, bellman-ford algo is gonna be able to solve the shortest path problem, while dijkstra won't be able to.
+
+Now why would you ever use dijkstra's algo if bellman-ford can do better?
+
+Because bellman-ford can take a long time to run in terms of complexity and it's not the most efficient algo. The worst case for bellman-ford algo is
+usually O(n^2) , so it's not very efficient. dijkstra is faster with the downside that it can't accommodate for negative weights between vertices.
+
+So if the graph is weighted and there's not negative weights in it, we use dijkstra.
+
 ## 199-020 Searching + Traversal Review
 
 ---
