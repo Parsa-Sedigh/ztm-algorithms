@@ -48,6 +48,10 @@ linked list, you start at the head and traverse the list until you get to item 5
 you start from the head and you keep going until you hit null and we have to use sth like a `while` loop when we implement our own linked list, because we don't
 usually know how long the list is going to be.
 
+Iterating = you know when it's gonna end
+
+Traversal = you **don't** know where it's gonna end
+
 Another advantage that array might have is that most computers have caching systems that make reading from sequential memory(memory next to each other), faster than
 reading scattered addresses. Array items are always located right next to each other in memory. Linked lists(it's nodes) instead are scattered all over memory, kind of
 like hash tables. So traversing through a linked list is usually quite a bit slower than iterating through items in an array, even though they're technically both O(n) .

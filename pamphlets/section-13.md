@@ -7,7 +7,7 @@ larger datasets. We can;t usually just use a builtin sort method that comes with
 we can lower the costs. Most places sort their data or pre-processes it.
 
 ## 154-002 The Issue With sort()
-In js, the sort() method the way it sorts numbers, is that it actually converts them to string. So isntead of just comparing numbers, it first **converts
+In js, the sort() method the way it sorts numbers, is that it actually converts them to string. So instead of just comparing numbers, it first **converts
 that number to string and then grabs the character code of first index of string**, for example: `'65'.charCodeAt(0)` which will give us a number
 which is the unicode and then it sorts those numbers instead of original numbers.
 
@@ -35,10 +35,54 @@ Merge sort and quick sort are more complex that most of the time can be more eff
 ## 157-005 Exercise Bubble Sort
 File attached
 ## 158-006 Solution Bubble Sort
+```js
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function bubbleSort(array) {
+  const length = array.length;
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < length; j++) { 
+      if(array[j] > array[j+1]) {
+        //Swap the numbers
+        let temp = array[j]
+        array[j] = array[j+1];
+        array[j+1] = temp;
+      }
+    }        
+  }
+}
+
+bubbleSort(numbers);
+console.log(numbers);
+```
 ## 159-007 Selection Sort
 ## 160-008 Exercise Selection Sort
 File attached
 ## 161-009 Solution Selection Sort
+```js
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function selectionSort(array) {
+  const length = array.length;
+  for(let i = 0; i < length; i++){
+    // set current index as minimum
+    let min = i;
+    let temp = array[i];
+    for(let j = i+1; j < length; j++){
+      if (array[j] < array[min]){
+        //update minimum if current is lower that what we had previously
+        min = j;
+      }
+    }
+    array[i] = array[min];
+    array[min] = temp;
+  }
+  return array;
+}
+
+selectionSort(numbers);
+console.log(numbers);
+```
 ## 162-010 Dancing Algorithms
 ## 163-011 Insertion Sort
 Insertion sort is not the most efficient algo either, but there's cases where it's actually extremely fast. It's useful for times
@@ -53,10 +97,36 @@ Now repeat these steps... .
 
 This type of sorting performs really well when it comes to small datasets.
 
-
 ## 164-012 Exercise Insertion Sort
 File attached
 ## 165-013 Solution Insertion Sort
+```js
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function insertionSort(array) {
+  const length = array.length;
+	for (let i = 0; i < length; i++) {
+		if (array[i] < array[0]) {
+      //move number to the first position
+      array.unshift(array.splice(i,1)[0]);
+    } else {
+      // only sort number smaller than number on the left of it. This is the part of insertion sort that makes it fast if the array is almost sorted.
+      if (array[i] < array[i-1]) {
+        //find where number should go
+        for (var j = 1; j < i; j++) {
+          if (array[i] >= array[j-1] && array[i] < array[j]) {
+            //move number to the right spot
+            array.splice(j,0,array.splice(i,1)[0]);
+          }
+        }
+      }
+    }
+	}
+}
+
+insertionSort(numbers);
+console.log(numbers);
+```
 ## 166-014 Merge Sort and O(n log n)
 Let's look at merge sort and quick sort. Unlike bubble, insertion and selection sort, **the merge and quick sort use the divide and conquer technique(and the
 idea of recursion)** which means when looking through a phone book, we open up that book not from the first page but from the middle page and we 
@@ -69,6 +139,50 @@ Anytime you see a divide and conquer, it usually gives you a `log n` advantage.
 ## 167-015 Exercise Merge Sort
 File attached
 ## 168-016 Solution Merge Sort
+```js
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function mergeSort (array) {
+  if (array.length === 1) {
+    return array
+  }
+  // Split Array in into right and left
+  const length = array.length;
+  const middle = Math.floor(length / 2)
+  const left = array.slice(0, middle) 
+  const right = array.slice(middle)
+  // console.log('left:', left);
+  // console.log('right:', right);
+
+  
+  return merge(
+    mergeSort(left),
+    mergeSort(right)
+  )
+}
+
+function merge(left, right){
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while(leftIndex < left.length && 
+        rightIndex < right.length){
+     if(left[leftIndex] < right[rightIndex]){
+       result.push(left[leftIndex]);
+       leftIndex++;
+     } else{
+       result.push(right[rightIndex]);
+       rightIndex++
+    }
+  }  
+  // console.log(left, right)
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+
+
+const answer = mergeSort(numbers);
+console.log(answer);
+```
 ## 169-017 Stable VS Unstable Algorithms
 File attached
 ## 170-018 Quick Sort
@@ -95,6 +209,52 @@ When should we use which sorting algo?
 
 ## 171-019 Optional Exercise Quick Sort
 File attached
+
+Solution:
+```js
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+function quickSort(array, left, right){
+  const len = array.length; 
+  let pivot;
+  let partitionIndex;
+
+  if(left < right) {
+    pivot = right;
+    partitionIndex = partition(array, pivot, left, right);
+    
+    //sort left and right
+    quickSort(array, left, partitionIndex - 1);
+    quickSort(array, partitionIndex + 1, right);
+  }
+  return array;
+}
+   
+function partition(array, pivot, left, right){
+  let pivotValue = array[pivot];
+  let partitionIndex = left;
+
+  for(let i = left; i < right; i++) {
+    if(array[i] < pivotValue){
+      swap(array, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(array, right, partitionIndex);
+  return partitionIndex;
+}
+
+function swap(array, firstIndex, secondIndex){
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+}
+
+//Select first and last index as 2nd and 3rd parameters
+quickSort(numbers, 0, numbers.length - 1);
+console.log(numbers);
+```
+
 ## 172-020 Which Sort Is Best
 When should you use insertion sort?
 
@@ -204,7 +364,6 @@ expensive) and also IF we can pick a good pivot.
 Q8:
 
 Bubble sort and selection sort.
-
 
 ## 178-026 Sorting In Your Language
 The sort builtin function in programming languages in most cases is gonna be either quicksort or insertion sort and merge sort combined together.

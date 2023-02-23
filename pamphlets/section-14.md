@@ -42,6 +42,7 @@ If the items are not sorted, we have to go through one by one. But if they're so
 are doing the same thing).
 
 Linear search -> O(n)
+
 Binary search -> O(log (n))
 
 Traversal means going from node to node, either finding a specific thing or making sure that we touch(visit) every single node(for example to do sth to each node).
