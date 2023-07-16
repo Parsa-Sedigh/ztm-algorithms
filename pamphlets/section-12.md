@@ -68,7 +68,7 @@ we don't return the result of calling inception. Yeah, in the last call stack va
 before that last one, are only calling inception() without returning the result of calling it. So we need to write: `return inception()` at the last line of function
 to actually propagate the result of calling that function recursively.
 
-So there's usually a base case and you always want to make sure you `return`, so that the value you want, gets bubled up all the way to the first call stack value(which
+So there's usually a base case and you always want to make sure you `return`, so that the value you want, gets bubbled up all the way to the first call stack value(which
 would be a function call definitely, because it's a **call** stack, right? It remembers function calls). 
 
 To build recursive functions:
