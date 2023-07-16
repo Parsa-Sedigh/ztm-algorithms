@@ -171,17 +171,18 @@ the space when it reaches the limit to create a larger array. Versus a linked li
 reference to where we want to insert or delete that node. This also becomes really fast when it's at the beginning or end of the list(we're gonna see this in stacks and
 queues).
 
-The primary reason to choose a linked list over sth like an array, is simplicity and ability to grow and shrink as needed.
+**The primary reason to choose a linked list over sth like an array, is simplicity and ability to grow and shrink as needed.**
 
 Linked lists are used in file systems or browser history when you go back and forth on a browser, because you can traverse one by oen from one place to another and
 remember in hash tables, how we had this issue of collision and when we had a collison, when two or more key-value pairs had collision, we combined them into
 nodes and the first node pointing to the next one and ... .
 
-If you look at the hash table implementation in this course and in `set` method, we did a check to check if a memory address exist and if it does, we used an **array**
-to push our items in case we had multiple items(when we had a collision), because sometimes we can set our hash table memory size to be a lot smaller(therefore we might get
-get collision) like 2 and now you can see why now instead of using an array which everytime we need to insert a new item, yeah it work, but if we had to delete an item on the
-hash table and that item was collided and therefore in an array, we'd have to **unshift** the array which is very slow. So we can use a linked list so delete becomes
-easier.
+If you look at the hash table implementation in this course and in `set` method, we did a check to check if a memory address 
+exist and if it does, we used an **array** to push our items in case we had multiple items(when we had a collision), because
+sometimes we can set our hash table memory size to be a lot smaller(therefore we might get get collision) like 2 and now you can see why
+now instead of using an array which everytime we need to insert a new item, yeah it work, but if we had to delete an item on the
+hash table and that item was collided and therefore in an array, we'd have to **unshift** the array which is very slow. So we can use
+a linked list so delete becomes easier.
 
 ---
 ### Linked list:

@@ -26,7 +26,7 @@ with `O(n/k)` where k is the size of your hash table and by removing constants, 
 
 Key-value pairs creates sth called a bucket in hash tables.
 
-There are two common ways to deal with these collisions:
+There are three common ways to deal with these collisions:
 1) With linked lists(separate chaining)
 2) open addressing
 3) robin-hood hashing
@@ -51,7 +51,7 @@ Look at the attached file.
 
 ## 83-009 Hash Tables VS Arrays_en
 Hash tables are great when you want quick access to certain values. Remember that searching through an array for an item takes a long time, we have to
-loop thrpugh every item and see if the element we want is that one or not, but with hash tables that's really fast and this is why hash tables are used in DBs,
+loop through every item and see if the element we want is that one or not, but with hash tables that's really fast and this is why hash tables are used in DBs,
 because we want to search for sth in a DB and it gives it back to us right away. 
 
 Inserting items in a hash table unlike an array that might shift indexes, is **typically** O(1). You just have to hash and create the key. Although
@@ -66,6 +66,64 @@ the place!
 File attached.
 
 ## 87-013 Hash Tables Review
+
+```js
+class HashTable {
+  constructor(size){
+    this.data = new Array(size);
+    // this.data = [];
+  }
+
+  _hash(key) {
+    let hash = 0;
+    for (let i =0; i < key.length; i++){
+        hash = (hash + key.charCodeAt(i) * i) % this.data.length
+    }
+    return hash;
+  }
+
+  set(key, value) {
+    let address = this._hash(key);
+    if (!this.data[address]) {
+      this.data[address] = [];
+    }
+    this.data[address].push([key, value]);
+    return this.data;
+  }
+
+  get(key){
+    const address = this._hash(key);
+    const currentBucket = this.data[address]
+    if (currentBucket) {
+      for(let i = 0; i < currentBucket.length; i++){
+        if(currentBucket[i][0] === key) {
+          return currentBucket[i][1]
+        }
+      }
+    }
+    return undefined;
+  }
+  
+  keys(){
+    const keysArray = [];
+    console.log(this.data.length);
+    for (let i = 0; i < this.data.length; i++){
+      if(this.data[i]){
+        keysArray.push(this.data[i][0][0])
+      }
+    }
+    return keysArray;
+  }
+}
+
+const myHashTable = new HashTable(50);
+myHashTable.set('grapes', 10000)
+myHashTable.set('grapes', 10000)
+myHashTable.get('grapes')
+myHashTable.set('apples', 9)
+myHashTable.get('apples')
+myHashTable.keys()
+```
 
 002 MD5
 http://www.miraclesalad.com/webtools/md5.php
