@@ -44,7 +44,7 @@ Total number of nodes in a binary tree: 2^h - 1
 `log nodes = steps`(we dropped -1 from the above formula because it's insignificant)
 
 log n means that based on the height, the maximum number of decisions(let's say we're looking for a specific node) that we're gonna take,
-is gonna be log n.
+is gonna be `log n`.
 
 Note:
 for example: log 100 = 2 because 10^2 = 100
@@ -98,7 +98,7 @@ Because we have to loop through every node.
 This is why an unbalanced BST is bad.
 
 How do you balance a BST?
-There are some algorithms. For example we have AVL trees and red black trees allow us to make sure that our BST is gonna be balanced.
+There are some algorithms. For example, we have AVL trees and red black trees allow us to make sure that our BST is gonna be balanced.
 
 ## 129-006 BST Pros and Cons
 **Assuming the BST is balanced**, look at the BST pros & cons slide.
@@ -152,7 +152,7 @@ cases where our balanced tree turns into a linear unbalanced tree and we get O(n
 
 Usually you use a library that implements these trees.
 
-So these two trees are usually the most popular for balancing BSTs. Just explain why they are useful(because if we have an unblanced tree, it will become
+So these two trees are usually the most popular for balancing BSTs. Just explain why they are useful(because if we have an unbalanced tree, it will become
 like a linked list and gets O(n) on all operations).
 
 ## 136-013 Resources AVL Trees + Red Black Trees
@@ -188,7 +188,7 @@ heap.
 Memory heap is a heap of memory if you're talking about a language runtime for example. VS a heap DS, they're different.
 
 ## 130-016 Priority Queue
-The beauty of binary heaps is that they take up the least amount of space possible because it's always left to right insertion. So there's no conept of
+The beauty of binary heaps is that they take up the least amount of space possible because it's always left to right insertion. So there's no concept of
 an unbalanced binary heap. We don't have to re-balance it like a BST, because of this(because they do left to right insertion), they preserve this order of 
 insertion, which is great and you can implement binary heaps using arrays vs what we did before with BSTs where we used nodes.
 
